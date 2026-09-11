@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Netlify Style Landing Page</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #10161d;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           TOP BANNER
+        ========================= */
+
+        .top-banner {
+            height: 42px;
+            background: #2ddbd7;
+            color: #102026;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .top-banner a {
+            color: #102026;
+            margin-left: 5px;
+            text-decoration: underline;
+        }
+
+        .close {
+            position: absolute;
+            right: 16px;
+            top: 9px;
+
+            font-size: 30px;
+            font-weight: 300;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            height: 86px;
+            display: flex;
+            align-items: center;
+
+            padding: 0 7.5%;
+
+            background: #10161d;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -2px;
+
+            margin-right: 45px;
+
+            color: white;
+        }
+
+        .logo span {
+            color: #2edbd7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+
+            flex: 1;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .nav-links a::after {
+            content: "⌄";
+            margin-left: 7px;
+            font-size: 16px;
+        }
+
+        .nav-links a:nth-child(4)::after,
+        .nav-links a:nth-child(5)::after {
+            content: "";
+        }
+
+        .right-nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .search {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .contact {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .dashboard {
+            background: #2edbd7;
+            color: #10161d;
+
+            padding: 14px 25px;
+            border-radius: 30px;
+
+            font-size: 17px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .avatar {
+            width: 43px;
+            height: 43px;
+
+            border-radius: 50%;
+
+            background: #51d378;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 610px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            align-items: center;
+
+            padding: 50px 6.5% 70px;
+            gap: 50px;
+        }
+
+        .hero-left {
+            padding-left: 2%;
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 5.3vw, 86px);
+            line-height: 0.98;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 35px;
+
+            color: #edf2f8;
+        }
+
+        .hero-description {
+            max-width: 620px;
+
+            font-size: 21px;
+            line-height: 1.55;
+
+            color: #d2f2f2;
+
+            margin-bottom: 38px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 15px 24px;
+
+            border-radius: 30px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #2edbd7;
+            color: #10161d;
+        }
+
+        .btn-secondary {
+            background: #252e36;
+            color: #2edbd7;
+        }
+
+        /* =========================
+           CODE BOX
+        ========================= */
+
+        .code-area {
+            margin-top: 28px;
+        }
+
+        .code-title {
+            color: #b8c4c8;
+            font-size: 15px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .code-box {
+            display: flex;
+            align-items: center;
+
+            width: 370px;
+            max-width: 100%;
+
+            background: #272f37;
+
+            padding: 14px 18px;
+
+            border-radius: 30px;
+
+            font-family: monospace;
+            color: #39e1dc;
+
+            font-size: 15px;
+        }
+
+        .code-box .arrow {
+            margin-right: 13px;
+        }
+
+        .copy {
+            margin-left: auto;
+            font-size: 19px;
+        }
+
+        /* =========================
+           ILLUSTRATION
+        ========================= */
+
+        .illustration {
+            position: relative;
+
+            width: 100%;
+            max-width: 800px;
+
+            height: 490px;
+
+            border: 2px dashed #65717b;
+            border-radius: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .browser {
+            position: absolute;
+
+            width: 70%;
+            height: 270px;
+
+            top: 25px;
+            left: 18%;
+
+            border: 4px solid #edf2f8;
+            border-radius: 18px;
+
+            background: #10161d;
+        }
+
+        .browser-top {
+            height: 45px;
+
+            border-bottom: 4px solid #edf2f8;
+
+            display: flex;
+            align-items: center;
+
+            padding-left: 14px;
+            gap: 8px;
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .chart {
+            position: absolute;
+
+            width: 260px;
+            height: 155px;
+
+            left: -55px;
+            top: 70px;
+
+            border: 4px solid #edf2f8;
+            border-radius: 20px;
+
+            background: #10161d;
+        }
+
+        .chart-line {
+            position: absolute;
+
+            width: 160px;
+            height: 80px;
+
+            left: 42px;
+            top: 37px;
+
+            border-left: 3px solid white;
+            border-bottom: 3px solid white;
+
+            transform: skewY(-20deg);
+        }
+
+        .chart-point {
+            position: absolute;
+
+            width: 11px;
+            height: 11px;
+
+            background: #10161d;
+
+            border: 3px solid white;
+
+            border-radius: 50%;
+        }
+
+        .p1 {
+            left: 60px;
+            top: 91px;
+        }
+
+        .p2 {
+            left: 90px;
+            top: 77px;
+        }
+
+        .p3 {
+            left: 125px;
+            top: 60px;
+        }
+
+        .p4 {
+            left: 160px;
+            top: 78px;
+        }
+
+        .p5 {
+            left: 190px;
+            top: 50px;
+        }
+
+        /* IMAGE CARD */
+
+        .image-card {
+            position: absolute;
+
+            right: -55px;
+            top: 105px;
+
+            width: 205px;
+            height: 130px;
+
+            border: 4px solid white;
+            border-radius: 20px;
+
+            background: #10161d;
+        }
+
+        .mountain {
+            position: absolute;
+
+            bottom: 15px;
+            left: 30px;
+
+            width: 125px;
+            height: 55px;
+
+            border-top: 4px solid white;
+
+            transform: rotate(-10deg);
+        }
+
+        .tree {
+            position: absolute;
+
+            right: 35px;
+            bottom: 30px;
+
+            font-size: 60px;
+        }
+
+        /* LOCK */
+
+        .lock {
+            position: absolute;
+
+            top: 80px;
+            right: 175px;
+
+            width: 60px;
+            height: 60px;
+
+            border: 4px solid white;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+        }
+
+        /* UPLOAD ARROW */
+
+        .upload {
+            position: absolute;
+
+            left: 49%;
+            top: 205px;
+
+            text-align: center;
+        }
+
+        .upload-arrow {
+            font-size: 55px;
+            line-height: 50px;
+        }
+
+        .upload-text {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* FORM */
+
+        .form-card {
+            position: absolute;
+
+            left: 30%;
+            bottom: 65px;
+
+            width: 180px;
+            height: 95px;
+
+            border: 4px solid white;
+            border-radius: 18px;
+
+            background: #10161d;
+        }
+
+        .form-line {
+            width: 105px;
+            height: 12px;
+
+            border: 3px solid white;
+            border-radius: 10px;
+
+            margin: 18px auto 10px;
+        }
+
+        .form-check {
+            font-size: 24px;
+            margin-left: 18px;
+        }
+
+        /* STAR */
+
+        .star {
+            position: absolute;
+
+            left: 20px;
+            bottom: 45px;
+
+            font-size: 110px;
+
+            color: #ffb13b;
+
+            filter: drop-shadow(0 0 1px white);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 50px 7%;
+            }
+
+            .hero-left {
+                padding-left: 0;
+            }
+
+            .illustration {
+                height: 420px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .top-banner {
+                font-size: 12px;
+                padding: 0 40px 0 10px;
+                text-align: center;
+            }
+
+            nav {
+                height: 70px;
+            }
+
+            .logo {
+                font-size: 26px;
+            }
+
+            .contact,
+            .search {
+                display: none;
+            }
+
+            .dashboard {
+                padding: 10px 17px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+                letter-spacing: -3px;
+            }
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .illustration {
+                height: 320px;
+                border-radius: 25px;
+            }
+
+            .browser {
+                height: 190px;
+            }
+
+            .chart {
+                transform: scale(.65);
+                transform-origin: left top;
+            }
+
+            .image-card {
+                transform: scale(.65);
+                transform-origin: right top;
+            }
+
+            .form-card {
+                transform: scale(.65);
+                transform-origin: left bottom;
+            }
+
+            .star {
+                font-size: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BANNER -->
+    <div class="top-banner">
+        Netlify's official Discord is live.
+        <a href="#">Join to share your work and connect with builders.</a>
+
+        <div class="close">×</div>
+    </div>
+
+
+    <!-- NAVBAR -->
+    <nav>
+
+        <div class="logo">
+            netlify<span>_</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Platform</a>
+            <a href="#">Solutions</a>
+            <a href="#">Developers</a>
+            <a href="#">Resources</a>
+            <a href="#">Pricing</a>
+        </div>
+
+        <div class="right-nav">
+
+            <div class="search">⌕</div>
+
+            <div class="contact">
+                Contact
+            </div>
+
+            <div class="dashboard">
+                Dashboard
+            </div>
+
+            <div class="avatar">
+                B
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <main class="hero">
+
+        <section class="hero-left">
+
+            <h1>
+                Push your ideas<br>
+                to the web
+            </h1>
+
+            <p class="hero-description">
+                Create with AI or code, deploy instantly on production
+                infrastructure. One platform to build and ship.
+            </p>
+
+            <div class="buttons">
+
+                <a href="start.html" class="btn btn-primary">
+    Start building
+</a>
+                <a href="#" class="btn btn-secondary">
+                    Request a demo
+                </a>
+
+            </div>
+
+            <div class="code-area">
+
+                <div class="code-title">
+                    Add Netlify to your coding agent
+                </div>
+
+                <div class="code-box">
+
+                    <span class="arrow">›</span>
+
+                    <span>
+                        fetch https://netlify.ai
+                    </span>
+
+                    <span class="copy">
+                        ▣
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ILLUSTRATION -->
+        <section class="illustration">
+
+            <div class="browser">
+
+                <div class="browser-top">
+                    <div class="browser-dot"></div>
+                    <div class="browser-dot"></div>
+                    <div class="browser-dot"></div>
+                </div>
+
+            </div>
+
+
+            <div class="chart">
+
+                <div class="chart-line"></div>
+
+                <div class="chart-point p1"></div>
+                <div class="chart-point p2"></div>
+                <div class="chart-point p3"></div>
+                <div class="chart-point p4"></div>
+                <div class="chart-point p5"></div>
+
+            </div>
+
+
+            <div class="image-card">
+
+                <div class="mountain"></div>
+
+                <div class="tree">
+                    ♧
+                </div>
+
+            </div>
+
+
+            <div class="lock">
+                ♙
+            </div>
+
+
+            <div class="upload">
+
+                <div class="upload-arrow">
+                    ↑
+                </div>
+
+                <div class="upload-text">
+                    Drop here
+                </div>
+
+            </div>
+
+
+            <div class="form-card">
+
+                <div class="form-line"></div>
+
+                <div class="form-check">
+                    ☑ ✓ ≋
+                </div>
+
+            </div>
+
+
+            <div class="star">
+                ★
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
