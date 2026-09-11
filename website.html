@@ -38,7 +38,321 @@
             color: #191614;
         }
 
+/* =========================
+   ORDER MODAL
+========================= */
 
+.order-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    background:
+        rgba(0, 0, 0, .65);
+
+    backdrop-filter:
+        blur(7px);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+.order-overlay.active {
+
+    display: flex;
+}
+
+
+.order-modal {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 480px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #fff;
+
+    border-radius: 24px;
+
+    padding: 34px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, .3);
+
+    animation:
+        orderPopup .25s ease;
+}
+
+
+@keyframes orderPopup {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+.close-order {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 18px;
+
+    width: 36px;
+
+    height: 36px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f1efec;
+
+    color: #333;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+.order-header {
+
+    margin-bottom: 28px;
+}
+
+
+.order-label {
+
+    color: #8b6040;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+.order-header h2 {
+
+    font-size: 30px;
+
+    margin:
+        8px 0;
+}
+
+
+.order-header p {
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* FORM */
+
+.order-modal label {
+
+    display: block;
+
+    margin:
+        17px 0 8px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #38332f;
+}
+
+
+.order-modal input,
+.order-modal select,
+.order-modal textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #ddd6cf;
+
+    border-radius: 12px;
+
+    background: #faf9f7;
+
+    padding:
+        13px 14px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+
+.order-modal input:focus,
+.order-modal select:focus,
+.order-modal textarea:focus {
+
+    border-color: #8b6040;
+
+    background: white;
+}
+
+
+.order-modal textarea {
+
+    resize: vertical;
+}
+
+
+/* QUANTITY */
+
+.quantity {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.quantity button {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #191614;
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+.quantity input {
+
+    flex: 1;
+
+    text-align: center;
+
+    height: 42px;
+}
+
+
+/* TOTAL */
+
+.order-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #e5dfd8;
+}
+
+
+.order-total span {
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+.order-total strong {
+
+    color: #8b6040;
+
+    font-size: 21px;
+}
+
+
+/* CONFIRM */
+
+.confirm-order {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: #191614;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.confirm-order:hover {
+
+    transform:
+        translateY(-2px);
+
+    background: #302a26;
+}
         /* =========================
            NAVBAR
         ========================= */
@@ -1616,7 +1930,163 @@
         </div>
 
     </footer>
+<!-- =========================
+     ORDER MODAL
+========================= -->
 
+<div class="order-overlay" id="orderOverlay">
+
+    <div class="order-modal">
+
+        <button
+            class="close-order"
+            onclick="closeOrder()"
+        >
+            ×
+        </button>
+
+        <div class="order-header">
+
+            <span class="order-label">
+                COFFEE HOUSE
+            </span>
+
+            <h2>
+                Place your order ☕
+            </h2>
+
+            <p>
+                Isi pesanan kamu di bawah.
+            </p>
+
+        </div>
+
+
+        <form
+            id="orderForm"
+            onsubmit="submitOrder(event)"
+        >
+
+            <label>
+                Nama
+            </label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Masukkan nama"
+                required
+            >
+
+
+            <label>
+                Menu
+            </label>
+
+            <select
+                id="orderItem"
+                required
+            >
+
+                <option value="">
+                    Pilih menu
+                </option>
+
+                <option value="Classic Espresso">
+                    Classic Espresso — Rp 25.000
+                </option>
+
+                <option value="Cafe Latte">
+                    Cafe Latte — Rp 32.000
+                </option>
+
+                <option value="Iced Coffee">
+                    Iced Coffee — Rp 30.000
+                </option>
+
+                <option value="Mocha">
+                    Mocha — Rp 35.000
+                </option>
+
+                <option value="Matcha Latte">
+                    Matcha Latte — Rp 34.000
+                </option>
+
+                <option value="Butter Croissant">
+                    Butter Croissant — Rp 28.000
+                </option>
+
+            </select>
+
+
+            <label>
+                Jumlah
+            </label>
+
+            <div class="quantity">
+
+                <button
+                    type="button"
+                    onclick="changeQuantity(-1)"
+                >
+                    −
+                </button>
+
+                <input
+                    type="number"
+                    id="orderQuantity"
+                    value="1"
+                    min="1"
+                    max="20"
+                    readonly
+                >
+
+                <button
+                    type="button"
+                    onclick="changeQuantity(1)"
+                >
+                    +
+                </button>
+
+            </div>
+
+
+            <label>
+                Catatan
+            </label>
+
+            <textarea
+                id="orderNote"
+                placeholder="Contoh: less sugar, tanpa es..."
+                rows="3"
+            ></textarea>
+
+
+            <div class="order-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="orderTotal">
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="confirm-order"
+            >
+                Confirm order →
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
 
     <!-- =========================
@@ -1672,6 +2142,148 @@
 
         }
 
+function closeOrder() {
+
+    document
+        .getElementById("orderOverlay")
+        .classList.remove("active");
+
+}
+
+
+function changeQuantity(amount) {
+
+    const input =
+        document.getElementById("orderQuantity");
+
+    let value =
+        parseInt(input.value) + amount;
+
+
+    if (value < 1) {
+        value = 1;
+    }
+
+
+    if (value > 20) {
+        value = 20;
+    }
+
+
+    input.value = value;
+
+    updateTotal();
+
+}
+
+
+function updateTotal() {
+
+    const item =
+        document.getElementById("orderItem").value;
+
+    const quantity =
+        parseInt(
+            document.getElementById("orderQuantity").value
+        );
+
+
+    const price =
+        prices[item] || 0;
+
+
+    const total =
+        price * quantity;
+
+
+    document
+        .getElementById("orderTotal")
+        .textContent =
+        "Rp " +
+        total.toLocaleString("id-ID");
+
+}
+
+
+document
+    .getElementById("orderItem")
+    .addEventListener(
+        "change",
+        updateTotal
+    );
+
+
+function submitOrder(event) {
+
+    event.preventDefault();
+
+
+    const name =
+        document
+            .getElementById("customerName")
+            .value;
+
+
+    const item =
+        document
+            .getElementById("orderItem")
+            .value;
+
+
+    const quantity =
+        document
+            .getElementById("orderQuantity")
+            .value;
+
+
+    const note =
+        document
+            .getElementById("orderNote")
+            .value;
+
+
+    const total =
+        document
+            .getElementById("orderTotal")
+            .textContent;
+
+
+    alert(
+
+        "☕ ORDER BERHASIL!\n\n" +
+
+        "Nama: " + name + "\n" +
+
+        "Menu: " + item + "\n" +
+
+        "Jumlah: " + quantity + "\n" +
+
+        "Total: " + total +
+
+        (note
+            ? "\nCatatan: " + note
+            : ""
+        )
+
+    );
+
+
+    closeOrder();
+
+
+    document
+        .getElementById("orderForm")
+        .reset();
+
+
+    document
+        .getElementById("orderQuantity")
+        .value = 1;
+
+
+    updateTotal();
+
+}
     </script>
 
 
