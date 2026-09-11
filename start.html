@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Start Building</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0f151c;
+            color: #eef3f7;
+        }
+
+        /* ======================
+           NAVBAR
+        ====================== */
+
+        nav {
+            height: 76px;
+            border-bottom: 1px solid #29323a;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 45px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            color: #2edbd7;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 30px;
+            margin-left: 60px;
+        }
+
+        .nav-center a {
+            color: #cbd3d9;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-center a:hover {
+            color: white;
+        }
+
+        .nav-right {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .help {
+            color: #b8c2c9;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: #52d477;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+            color: #102019;
+        }
+
+        /* ======================
+           MAIN
+        ====================== */
+
+        main {
+            max-width: 1150px;
+            margin: auto;
+
+            padding: 65px 30px;
+        }
+
+        .welcome {
+            margin-bottom: 45px;
+        }
+
+        .welcome h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            color: #aeb9c1;
+            font-size: 17px;
+        }
+
+        /* ======================
+           BUILD OPTIONS
+        ====================== */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .card {
+            min-height: 280px;
+
+            background: #171e26;
+
+            border: 1px solid #303943;
+
+            border-radius: 15px;
+
+            padding: 30px;
+
+            transition: .25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            border-color: #2edbd7;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+        }
+
+        .icon {
+            width: 52px;
+            height: 52px;
+
+            border-radius: 12px;
+
+            background: #25343b;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #9ca8b0;
+            line-height: 1.6;
+
+            font-size: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .card button {
+            border: none;
+
+            background: transparent;
+
+            color: #2edbd7;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            text-decoration: underline;
+        }
+
+        /* ======================
+           QUICK DEPLOY
+        ====================== */
+
+        .deploy {
+            margin-top: 55px;
+
+            background: #171e26;
+
+            border: 1px solid #303943;
+
+            border-radius: 18px;
+
+            padding: 35px;
+        }
+
+        .deploy h2 {
+            margin-bottom: 8px;
+        }
+
+        .deploy p {
+            color: #9ca8b0;
+            margin-bottom: 25px;
+        }
+
+        .drop-zone {
+            height: 180px;
+
+            border: 2px dashed #46545e;
+
+            border-radius: 14px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            transition: .2s;
+        }
+
+        .drop-zone:hover {
+            border-color: #2edbd7;
+            background: #121b21;
+        }
+
+        .upload-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .drop-zone strong {
+            font-size: 17px;
+        }
+
+        .drop-zone span {
+            color: #87939b;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .upload-button {
+            margin-top: 18px;
+
+            background: #2edbd7;
+            color: #10161d;
+
+            border: none;
+
+            padding: 12px 22px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            transform: scale(1.03);
+        }
+
+        /* ======================
+           RECENT PROJECTS
+        ====================== */
+
+        .projects {
+            margin-top: 55px;
+        }
+
+        .projects h2 {
+            margin-bottom: 20px;
+        }
+
+        .project {
+            display: flex;
+            align-items: center;
+
+            background: #171e26;
+
+            border: 1px solid #303943;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            margin-bottom: 12px;
+        }
+
+        .project-icon {
+            width: 42px;
+            height: 42px;
+
+            background: #263139;
+
+            border-radius: 9px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 15px;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .project-status {
+            font-size: 13px;
+            color: #63dc87;
+        }
+
+        .project-open {
+            color: #2edbd7;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* ======================
+           RESPONSIVE
+        ====================== */
+
+        @media(max-width: 850px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            main {
+                padding: 45px 20px;
+            }
+
+            .welcome h1 {
+                font-size: 34px;
+            }
+        }
+
+        @media(max-width: 500px) {
+
+            .help {
+                display: none;
+            }
+
+            .deploy {
+                padding: 22px;
+            }
+
+            .card {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            netlify<span>_</span>
+        </div>
+
+        <div class="nav-center">
+            <a href="index.html">Home</a>
+            <a href="#">Projects</a>
+            <a href="#">Deploys</a>
+            <a href="#">Domains</a>
+        </div>
+
+        <div class="nav-right">
+
+            <div class="help">
+                Help
+            </div>
+
+            <div class="avatar">
+                B
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <section class="welcome">
+
+            <h1>
+                Start building
+            </h1>
+
+            <p>
+                Choose how you want to create and deploy your next website.
+            </p>
+
+        </section>
+
+
+        <!-- BUILD CARDS -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <div class="icon">
+                    ✨
+                </div>
+
+                <h2>
+                    Build with AI
+                </h2>
+
+                <p>
+                    Describe your idea and let AI help you create
+                    a beautiful website from scratch.
+                </p>
+
+                <button onclick="location.href='ai.html'">
+    Start with AI →
+</button>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    &lt;/&gt;
+                </div>
+
+                <h2>
+                    Import existing project
+                </h2>
+
+                <p>
+                    Bring your project from VS Code or another
+                    development environment and deploy it.
+                </p>
+
+                <button onclick="location.href='create.html'">
+    Create project →
+</button>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">
+                    🚀
+                </div>
+
+                <h2>
+                    Deploy manually
+                </h2>
+
+                <p>
+                    Upload your HTML, CSS, JavaScript and other
+                    files directly to the web.
+                </p>
+
+                <button onclick="location.href='manual.html'">
+    Deploy manually →
+</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK DEPLOY -->
+
+        <section class="deploy">
+
+            <h2>
+                Quick deploy
+            </h2>
+
+            <p>
+                Upload your website folder and publish it instantly.
+            </p>
+
+            <div class="drop-zone">
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+                <strong>
+                    Drag & drop your website here
+                </strong>
+
+                <span>
+                    HTML, CSS, JavaScript and image files
+                </span>
+
+                <button
+                    class="upload-button"
+                    onclick="document.getElementById('fileInput').click()"
+                >
+                    Choose folder
+                </button>
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    webkitdirectory
+                    multiple
+                    hidden
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT PROJECTS -->
+
+        <section class="projects">
+
+            <h2>
+                Recent projects
+            </h2>
+
+            <div class="project">
+
+                <div class="project-icon">
+                    🌐
+                </div>
+
+                <div class="project-info">
+
+                    <div class="project-name">
+                        my-first-website
+                    </div>
+
+                    <div class="project-status">
+                        ● Published
+                    </div>
+
+                </div>
+
+                <a href="#" class="project-open">
+                    Open →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-icon">
+                    💻
+                </div>
+
+                <div class="project-info">
+
+                    <div class="project-name">
+                        portfolio
+                    </div>
+
+                    <div class="project-status">
+                        ● Published
+                    </div>
+
+                </div>
+
+                <a href="#" class="project-open">
+                    Open →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function aiBuild() {
+
+            alert(
+                "AI Builder\n\n" +
+                "Describe website yang ingin kamu buat."
+            );
+
+        }
+
+
+        function importProject() {
+
+            alert(
+                "Import Project\n\n" +
+                "web"
+            );
+
+        }
+
+
+        function manualDeploy() {
+
+            document
+                .getElementById("fileInput")
+                .click();
+
+        }
+
+
+        document
+            .getElementById("fileInput")
+            .addEventListener("change", function () {
+
+                if (this.files.length > 0) {
+
+                    alert(
+                        "Berhasil memilih " +
+                        this.files.length +
+                        " file.\n\n" +
+                        "Website siap untuk proses deploy."
+                    );
+
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Deploy Manually</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: #0f151c;
+
+            color: #eef3f7;
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+
+            height: 76px;
+
+            border-bottom: 1px solid #29323a;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 45px;
+        }
+
+
+        .logo {
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+        }
+
+
+        .logo span {
+
+            color: #2edbd7;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 28px;
+
+            margin-left: 60px;
+        }
+
+
+        .nav-links a {
+
+            color: #9da9b1;
+
+            text-decoration: none;
+
+            font-size: 15px;
+        }
+
+
+        .nav-links a:hover {
+
+            color: white;
+        }
+
+
+        .nav-right {
+
+            margin-left: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        .help {
+
+            color: #9da9b1;
+        }
+
+
+        .avatar {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: #52d477;
+
+            color: #102019;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+
+            max-width: 950px;
+
+            margin: auto;
+
+            padding: 45px 25px 100px;
+        }
+
+
+        .back {
+
+            display: inline-block;
+
+            color: #89959d;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .back:hover {
+
+            color: #2edbd7;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+
+            margin-bottom: 35px;
+        }
+
+
+        .header h1 {
+
+            font-size: 40px;
+
+            margin-bottom: 10px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .header p {
+
+            color: #9ba7af;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           DEPLOY CARD
+        ========================= */
+
+        .deploy-card {
+
+            background: #171e26;
+
+            border: 1px solid #303943;
+
+            border-radius: 18px;
+
+            padding: 30px;
+        }
+
+
+        .deploy-card h2 {
+
+            font-size: 19px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .deploy-card-description {
+
+            color: #89959d;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           DROP ZONE
+        ========================= */
+
+        .drop-zone {
+
+            min-height: 270px;
+
+            border: 2px dashed #46545e;
+
+            border-radius: 15px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 30px;
+
+            transition: .25s;
+
+            cursor: pointer;
+        }
+
+
+        .drop-zone:hover {
+
+            border-color: #2edbd7;
+
+            background: #121b21;
+        }
+
+
+        .drop-zone.dragover {
+
+            border-color: #2edbd7;
+
+            background: #12252a;
+
+            transform: scale(1.01);
+        }
+
+
+        .upload-icon {
+
+            width: 70px;
+            height: 70px;
+
+            border-radius: 18px;
+
+            background: #25343b;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 35px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .drop-zone h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .drop-zone p {
+
+            color: #7f8b94;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .choose-button {
+
+            margin-top: 20px;
+
+            border: none;
+
+            background: #2edbd7;
+
+            color: #10161d;
+
+            padding: 12px 22px;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .choose-button:hover {
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           FILE LIST
+        ========================= */
+
+        .file-section {
+
+            display: none;
+
+            margin-top: 30px;
+        }
+
+
+        .file-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+        }
+
+
+        .file-header h2 {
+
+            font-size: 18px;
+        }
+
+
+        .file-count {
+
+            color: #7f8b94;
+
+            font-size: 13px;
+        }
+
+
+        .file-list {
+
+            border: 1px solid #303943;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            max-height: 310px;
+
+            overflow-y: auto;
+        }
+
+
+        .file {
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 14px 17px;
+
+            border-bottom: 1px solid #29323a;
+
+            background: #121920;
+        }
+
+
+        .file:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .file-icon {
+
+            margin-right: 13px;
+
+            font-size: 19px;
+        }
+
+
+        .file-name {
+
+            flex: 1;
+
+            font-size: 14px;
+
+            color: #d4dce1;
+        }
+
+
+        .file-size {
+
+            color: #707d86;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           PROJECT NAME
+        ========================= */
+
+        .settings {
+
+            display: none;
+
+            margin-top: 30px;
+        }
+
+
+        .settings label {
+
+            display: block;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+
+        .settings input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background: #10161d;
+
+            border: 1px solid #39454f;
+
+            border-radius: 8px;
+
+            color: white;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+
+        .settings input:focus {
+
+            border-color: #2edbd7;
+        }
+
+
+        .settings small {
+
+            display: block;
+
+            color: #707d86;
+
+            font-size: 12px;
+
+            margin-top: 8px;
+        }
+
+
+        /* =========================
+           ACTION
+        ========================= */
+
+        .action {
+
+            display: none;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #303943;
+        }
+
+
+        .cancel {
+
+            padding: 13px 22px;
+
+            border-radius: 25px;
+
+            border: 1px solid #39454f;
+
+            background: transparent;
+
+            color: #aeb8bf;
+
+            cursor: pointer;
+        }
+
+
+        .deploy-button {
+
+            padding: 13px 25px;
+
+            border-radius: 25px;
+
+            border: none;
+
+            background: #2edbd7;
+
+            color: #10161d;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .deploy-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(46, 219, 215, .18);
+        }
+
+
+        /* =========================
+           PROGRESS
+        ========================= */
+
+        .progress-section {
+
+            display: none;
+
+            margin-top: 30px;
+
+            background: #171e26;
+
+            border: 1px solid #303943;
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            text-align: center;
+        }
+
+
+        .spinner {
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            border: 4px solid #303b43;
+
+            border-top-color: #2edbd7;
+
+            margin: auto auto 20px;
+
+            animation: spin 1s linear infinite;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        .progress-section h2 {
+
+            margin-bottom: 10px;
+        }
+
+
+        .progress-section p {
+
+            color: #89959d;
+
+            font-size: 14px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .progress-bar {
+
+            width: 100%;
+
+            height: 8px;
+
+            background: #29323a;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+
+        .progress {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: #2edbd7;
+
+            transition: width .5s;
+        }
+
+
+        .progress-text {
+
+            color: #6f7d86;
+
+            font-size: 12px;
+
+            margin-top: 10px;
+        }
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        .success {
+
+            display: none;
+
+            margin-top: 30px;
+
+            background: #171e26;
+
+            border: 1px solid #315b49;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            text-align: center;
+        }
+
+
+        .success-icon {
+
+            width: 75px;
+            height: 75px;
+
+            margin: auto auto 20px;
+
+            border-radius: 50%;
+
+            background: #1d4030;
+
+            color: #63dc87;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 36px;
+        }
+
+
+        .success h2 {
+
+            font-size: 25px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .success p {
+
+            color: #89959d;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .website-url {
+
+            display: inline-block;
+
+            padding: 14px 20px;
+
+            background: #10161d;
+
+            border: 1px solid #39454f;
+
+            border-radius: 9px;
+
+            color: #2edbd7;
+
+            font-family: monospace;
+
+            font-size: 14px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .success-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+        }
+
+
+        .open-button {
+
+            padding: 12px 22px;
+
+            border: none;
+
+            background: #2edbd7;
+
+            color: #10161d;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .new-button {
+
+            padding: 12px 22px;
+
+            border: 1px solid #39454f;
+
+            background: transparent;
+
+            color: #aeb8bf;
+
+            border-radius: 25px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 700px) {
+
+            nav {
+
+                padding: 0 20px;
+            }
+
+
+            .nav-links {
+
+                display: none;
+            }
+
+
+            .help {
+
+                display: none;
+            }
+
+
+            main {
+
+                padding: 35px 16px;
+            }
+
+
+            .header h1 {
+
+                font-size: 32px;
+            }
+
+
+            .deploy-card {
+
+                padding: 20px;
+            }
+
+
+            .drop-zone {
+
+                min-height: 230px;
+            }
+
+
+            .file-size {
+
+                display: none;
+            }
+
+
+            .action {
+
+                flex-direction: column;
+            }
+
+
+            .cancel,
+            .deploy-button {
+
+                width: 100%;
+            }
+
+
+            .success-buttons {
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+
+            netlify<span>_</span>
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="start.html">
+                Projects
+            </a>
+
+            <a href="#">
+                Deploys
+            </a>
+
+            <a href="#">
+                Domains
+            </a>
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <div class="help">
+                Help
+            </div>
+
+            <div class="avatar">
+                B
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- MAIN -->
+
+    <main>
+
+
+        <a
+            href="start.html"
+            class="back"
+        >
+            ← Back to Start Building
+        </a>
+
+
+
+        <!-- HEADER -->
+
+        <section class="header">
+
+            <h1>
+                Deploy manually
+            </h1>
+
+            <p>
+                Upload your website files and publish your project
+                to the web.
+            </p>
+
+        </section>
+
+
+
+        <!-- DEPLOY CARD -->
+
+        <section class="deploy-card">
+
+
+            <h2>
+                Upload your website
+            </h2>
+
+
+            <p class="deploy-card-description">
+                Select a folder containing your HTML, CSS,
+                JavaScript and other website files.
+            </p>
+
+
+
+            <!-- DROP ZONE -->
+
+            <div
+                class="drop-zone"
+                id="dropZone"
+            >
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+
+                <h3>
+                    Drag & drop your website here
+                </h3>
+
+
+                <p>
+                    or choose a folder from your computer
+                </p>
+
+
+                <button
+                    class="choose-button"
+                    onclick="openFolder()"
+                >
+                    Choose folder
+                </button>
+
+
+                <input
+                    type="file"
+                    id="folderInput"
+                    webkitdirectory
+                    multiple
+                    hidden
+                >
+
+            </div>
+
+
+
+            <!-- FILE LIST -->
+
+            <section
+                class="file-section"
+                id="fileSection"
+            >
+
+                <div class="file-header">
+
+                    <h2>
+                        Website files
+                    </h2>
+
+                    <span
+                        class="file-count"
+                        id="fileCount"
+                    >
+                        0 files
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="file-list"
+                    id="fileList"
+                ></div>
+
+            </section>
+
+
+
+            <!-- SETTINGS -->
+
+            <section
+                class="settings"
+                id="settings"
+            >
+
+                <label>
+                    Project name
+                </label>
+
+
+                <input
+                    type="text"
+                    id="projectName"
+                    placeholder="my-website"
+                >
+
+
+                <small>
+                    Nama ini akan digunakan untuk alamat website kamu.
+                </small>
+
+            </section>
+
+
+
+            <!-- ACTION -->
+
+            <div
+                class="action"
+                id="action"
+            >
+
+                <button
+                    class="cancel"
+                    onclick="location.href='start.html'"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    class="deploy-button"
+                    onclick="deployProject()"
+                >
+                    🚀 Deploy project
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- PROGRESS -->
+
+        <section
+            class="progress-section"
+            id="progressSection"
+        >
+
+            <div class="spinner"></div>
+
+
+            <h2>
+                Deploying your website...
+            </h2>
+
+
+            <p id="progressMessage">
+                Preparing your files...
+            </p>
+
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress"
+                    id="progress"
+                ></div>
+
+            </div>
+
+
+            <div
+                class="progress-text"
+                id="progressText"
+            >
+                0%
+            </div>
+
+        </section>
+
+
+
+        <!-- SUCCESS -->
+
+        <section
+            class="success"
+            id="success"
+        >
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h2>
+                Website published!
+            </h2>
+
+
+            <p>
+                Website kamu berhasil di-deploy.
+            </p>
+
+
+            <div class="website-url" id="websiteUrl">
+                https://my-website.example.com
+            </div>
+
+
+            <div class="success-buttons">
+
+                <button
+                    class="open-button"
+                    onclick="openWebsite()"
+                >
+                    Open website →
+                </button>
+
+
+                <button
+                    class="new-button"
+                    onclick="location.reload()"
+                >
+                    Deploy another
+                </button>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <script>
+
+
+        const folderInput =
+            document.getElementById("folderInput");
+
+
+        const dropZone =
+            document.getElementById("dropZone");
+
+
+        const fileSection =
+            document.getElementById("fileSection");
+
+
+        const fileList =
+            document.getElementById("fileList");
+
+
+        const fileCount =
+            document.getElementById("fileCount");
+
+
+        const settings =
+            document.getElementById("settings");
+
+
+        const action =
+            document.getElementById("action");
+
+
+
+        /* =========================
+           OPEN FOLDER
+        ========================= */
+
+        function openFolder() {
+
+            folderInput.click();
+
+        }
+
+
+
+        /* =========================
+           FILE SELECTED
+        ========================= */
+
+        folderInput.addEventListener(
+            "change",
+            function () {
+
+                showFiles(this.files);
+
+            }
+        );
+
+
+
+        /* =========================
+           SHOW FILES
+        ========================= */
+
+        function showFiles(files) {
+
+
+            if (!files || files.length === 0) {
+
+                return;
+
+            }
+
+
+            fileList.innerHTML = "";
+
+
+            fileCount.textContent =
+                files.length + " files";
+
+
+            Array.from(files)
+                .slice(0, 100)
+                .forEach(function (file) {
+
+
+                    const item =
+                        document.createElement("div");
+
+
+                    item.className = "file";
+
+
+                    let icon = "📄";
+
+
+                    if (
+                        file.name.endsWith(".html")
+                    ) {
+
+                        icon = "🌐";
+
+                    }
+
+                    else if (
+                        file.name.endsWith(".css")
+                    ) {
+
+                        icon = "🎨";
+
+                    }
+
+                    else if (
+                        file.name.endsWith(".js")
+                    ) {
+
+                        icon = "⚙️";
+
+                    }
+
+                    else if (
+                        file.type.startsWith("image/")
+                    ) {
+
+                        icon = "🖼️";
+
+                    }
+
+
+                    const size =
+                        formatSize(file.size);
+
+
+                    item.innerHTML = `
+
+                        <span class="file-icon">
+                            ${icon}
+                        </span>
+
+                        <span class="file-name">
+                            ${file.webkitRelativePath || file.name}
+                        </span>
+
+                        <span class="file-size">
+                            ${size}
+                        </span>
+
+                    `;
+
+
+                    fileList.appendChild(item);
+
+                });
+
+
+            fileSection.style.display =
+                "block";
+
+
+            settings.style.display =
+                "block";
+
+
+            action.style.display =
+                "flex";
+
+
+            /*
+                Ambil nama folder pertama
+            */
+
+            const firstFile =
+                files[0];
+
+
+            if (
+                firstFile.webkitRelativePath
+            ) {
+
+                const folder =
+                    firstFile.webkitRelativePath
+                    .split("/")[0];
+
+
+                document
+                    .getElementById("projectName")
+                    .value =
+                    folder
+                    .toLowerCase()
+                    .replace(/[^a-z0-9-]/g, "-");
+
+            }
+
+        }
+
+
+
+        /* =========================
+           FORMAT SIZE
+        ========================= */
+
+        function formatSize(bytes) {
+
+            if (bytes < 1024) {
+
+                return bytes + " B";
+
+            }
+
+
+            if (bytes < 1024 * 1024) {
+
+                return (
+                    (bytes / 1024).toFixed(1)
+                    + " KB"
+                );
+
+            }
+
+
+            return (
+                (bytes / (1024 * 1024)).toFixed(1)
+                + " MB"
+            );
+
+        }
+
+
+
+        /* =========================
+           DRAG & DROP
+        ========================= */
+
+        dropZone.addEventListener(
+            "dragover",
+            function (event) {
+
+                event.preventDefault();
+
+                dropZone.classList.add("dragover");
+
+            }
+        );
+
+
+        dropZone.addEventListener(
+            "dragleave",
+            function () {
+
+                dropZone.classList.remove("dragover");
+
+            }
+        );
+
+
+        dropZone.addEventListener(
+            "drop",
+            function (event) {
+
+                event.preventDefault();
+
+                dropZone.classList.remove("dragover");
+
+                showFiles(event.dataTransfer.files);
+
+            }
+        );
+
+
+
+        /* =========================
+           DEPLOY PROJECT
+        ========================= */
+
+        function deployProject() {
+
+
+            const name =
+                document
+                .getElementById("projectName")
+                .value
+                .trim();
+
+
+            if (!name) {
+
+                alert(
+                    "Masukkan nama project terlebih dahulu."
+                );
+
+                return;
+
+            }
+
+
+            /*
+                Sembunyikan form
+            */
+
+            document
+                .querySelector(".deploy-card")
+                .style.display = "none";
+
+
+            document
+                .getElementById("progressSection")
+                .style.display = "block";
+
+
+            let progress = 0;
+
+
+            const messages = [
+
+                "Preparing your files...",
+
+                "Uploading website files...",
+
+                "Building your project...",
+
+                "Configuring production environment...",
+
+                "Almost there..."
+
+            ];
+
+
+            const interval =
+                setInterval(function () {
+
+
+                    progress += 20;
+
+
+                    document
+                        .getElementById("progress")
+                        .style.width =
+                        progress + "%";
+
+
+                    document
+                        .getElementById("progressText")
+                        .textContent =
+                        progress + "%";
+
+
+                    const index =
+                        Math.min(
+                            Math.floor(progress / 20),
+                            messages.length - 1
+                        );
+
+
+                    document
+                        .getElementById("progressMessage")
+                        .textContent =
+                        messages[index];
+
+
+                    if (progress >= 100) {
+
+                        clearInterval(interval);
+
+
+                        setTimeout(function () {
+
+                            showSuccess(name);
+
+                        }, 700);
+
+                    }
+
+
+                }, 700);
+
+        }
+
+
+
+        /* =========================
+           SUCCESS
+        ========================= */
+
+        function showSuccess(name) {
+
+
+            document
+                .getElementById("progressSection")
+                .style.display =
+                "none";
+
+
+            document
+                .getElementById("success")
+                .style.display =
+                "block";
+
+
+            const cleanName =
+                name
+                .toLowerCase()
+                .replace(/[^a-z0-9-]/g, "-");
+
+
+            document
+                .getElementById("websiteUrl")
+                .textContent =
+                "https://" +
+                cleanName +
+                ".example.com";
+
+        }
+
+
+
+        /* =========================
+           OPEN WEBSITE
+        ========================= */
+
+        function openWebsite() {
+
+            alert(
+                "Di versi production, tombol ini akan membuka website yang sudah di-deploy."
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

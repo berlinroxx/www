@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Project</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0f151c;
+            color: #eef3f7;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 76px;
+            border-bottom: 1px solid #29323a;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 45px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            color: #2edbd7;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            margin-left: 60px;
+        }
+
+        .nav-links a {
+            color: #aeb8c0;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-right {
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .help {
+            color: #aeb8c0;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            background: #52d477;
+            color: #102019;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        /* MAIN */
+
+        main {
+            width: 100%;
+            max-width: 1000px;
+
+            margin: auto;
+
+            padding: 55px 25px 100px;
+        }
+
+        .back {
+            display: inline-block;
+
+            color: #8e9aa3;
+            text-decoration: none;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+        .back:hover {
+            color: #2edbd7;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #9ba7af;
+            font-size: 16px;
+        }
+
+        /* FORM */
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 310px;
+
+            gap: 30px;
+        }
+
+        .panel {
+            background: #171e26;
+
+            border: 1px solid #303943;
+
+            border-radius: 15px;
+
+            padding: 30px;
+        }
+
+        .panel h2 {
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+        .field {
+            margin-bottom: 28px;
+        }
+
+        .field label {
+            display: block;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            margin-bottom: 9px;
+        }
+
+        .field small {
+            display: block;
+
+            color: #7f8b94;
+
+            font-size: 12px;
+
+            margin-top: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+
+            background: #10161d;
+
+            border: 1px solid #39444e;
+
+            color: white;
+
+            padding: 14px 15px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2edbd7;
+        }
+
+        /* TEMPLATE */
+
+        .templates {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 12px;
+        }
+
+        .template {
+            background: #10161d;
+
+            border: 1px solid #39444e;
+
+            border-radius: 10px;
+
+            padding: 18px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .template:hover {
+            border-color: #2edbd7;
+        }
+
+        .template.active {
+            border-color: #2edbd7;
+
+            background: #132327;
+
+            box-shadow: 0 0 0 1px #2edbd7;
+        }
+
+        .template-icon {
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .template strong {
+            display: block;
+
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+        .template span {
+            color: #7f8b94;
+
+            font-size: 12px;
+        }
+
+        /* RIGHT SIDE */
+
+        .preview {
+            min-height: 280px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .preview-icon {
+            width: 80px;
+            height: 80px;
+
+            border-radius: 18px;
+
+            background: #24343b;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+
+            margin-bottom: 20px;
+        }
+
+        .preview h3 {
+            font-size: 18px;
+            margin-bottom: 9px;
+        }
+
+        .preview p {
+            color: #89959d;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .summary {
+            margin-top: 20px;
+
+            border-top: 1px solid #303943;
+
+            padding-top: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+
+            font-size: 13px;
+        }
+
+        .summary-row span:first-child {
+            color: #7f8b94;
+        }
+
+        .summary-row span:last-child {
+            color: #dce3e8;
+        }
+
+        /* BUTTON */
+
+        .bottom {
+            margin-top: 30px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+        }
+
+        .cancel {
+            padding: 13px 22px;
+
+            border: 1px solid #39444e;
+
+            border-radius: 25px;
+
+            background: transparent;
+
+            color: #b7c0c7;
+
+            cursor: pointer;
+        }
+
+        .create {
+            padding: 13px 25px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #2edbd7;
+
+            color: #10161d;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .create:hover {
+            transform: translateY(-1px);
+
+            box-shadow: 0 7px 20px rgba(46, 219, 215, .18);
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 800px) {
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .templates {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            main {
+                padding: 40px 18px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            netlify<span>_</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="start.html">Projects</a>
+            <a href="#">Deploys</a>
+            <a href="#">Domains</a>
+        </div>
+
+        <div class="nav-right">
+
+            <div class="help">
+                Help
+            </div>
+
+            <div class="avatar">
+                B
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <a href="start.html" class="back">
+            ← Back to Start Building
+        </a>
+
+
+        <section class="header">
+
+            <h1>
+                Create a new project
+            </h1>
+
+            <p>
+                Set up your project and start building your website.
+            </p>
+
+        </section>
+
+
+        <div class="content">
+
+            <!-- LEFT -->
+
+            <section class="panel">
+
+                <h2>
+                    Project settings
+                </h2>
+
+
+                <div class="field">
+
+                    <label>
+                        Project name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="projectName"
+                        placeholder="my-awesome-project"
+                    >
+
+                    <small>
+                        Choose a unique name for your project.
+                    </small>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Framework
+                    </label>
+
+                    <select id="framework">
+
+                        <option>HTML / CSS / JavaScript</option>
+
+                        <option>React</option>
+
+                        <option>Next.js</option>
+
+                        <option>Vue</option>
+
+                        <option>Angular</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Choose a template
+                    </label>
+
+
+                    <div class="templates">
+
+                        <div
+                            class="template active"
+                            onclick="selectTemplate(this, 'Blank')"
+                        >
+
+                            <div class="template-icon">
+                                📄
+                            </div>
+
+                            <strong>
+                                Blank
+                            </strong>
+
+                            <span>
+                                Start from scratch
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="template"
+                            onclick="selectTemplate(this, 'Portfolio')"
+                        >
+
+                            <div class="template-icon">
+                                💼
+                            </div>
+
+                            <strong>
+                                Portfolio
+                            </strong>
+
+                            <span>
+                                Personal website
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="template"
+                            onclick="selectTemplate(this, 'Landing Page')"
+                        >
+
+                            <div class="template-icon">
+                                🚀
+                            </div>
+
+                            <strong>
+                                Landing Page
+                            </strong>
+
+                            <span>
+                                Product website
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RIGHT -->
+
+            <aside class="panel">
+
+                <div class="preview">
+
+                    <div class="preview-icon" id="previewIcon">
+                        📄
+                    </div>
+
+                    <h3 id="previewName">
+                        Your project
+                    </h3>
+
+                    <p>
+                        Your new project will appear here
+                        after it has been created.
+                    </p>
+
+                </div>
+
+
+                <div class="summary">
+
+                    <div class="summary-row">
+
+                        <span>
+                            Framework
+                        </span>
+
+                        <span id="summaryFramework">
+                            HTML / CSS / JavaScript
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Template
+                        </span>
+
+                        <span id="summaryTemplate">
+                            Blank
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+
+        <!-- BUTTON -->
+
+        <div class="bottom">
+
+            <button
+                class="cancel"
+                onclick="location.href='start.html'"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="create"
+                onclick="createProject()"
+            >
+                Create project
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        let selectedTemplate = "Blank";
+
+
+        // PROJECT NAME
+
+        document
+            .getElementById("projectName")
+            .addEventListener("input", function () {
+
+                const name = this.value.trim();
+
+                document.getElementById("previewName").textContent =
+                    name || "Your project";
+
+            });
+
+
+        // FRAMEWORK
+
+        document
+            .getElementById("framework")
+            .addEventListener("change", function () {
+
+                document.getElementById(
+                    "summaryFramework"
+                ).textContent = this.value;
+
+            });
+
+
+        // TEMPLATE
+
+        function selectTemplate(element, template) {
+
+            document
+                .querySelectorAll(".template")
+                .forEach(function (item) {
+
+                    item.classList.remove("active");
+
+                });
+
+
+            element.classList.add("active");
+
+            selectedTemplate = template;
+
+
+            document.getElementById(
+                "summaryTemplate"
+            ).textContent = template;
+
+
+            const icons = {
+                "Blank": "📄",
+                "Portfolio": "💼",
+                "Landing Page": "🚀"
+            };
+
+
+            document.getElementById(
+                "previewIcon"
+            ).textContent = icons[template];
+
+        }
+
+
+        // CREATE
+
+        function createProject() {
+
+            const name =
+                document
+                .getElementById("projectName")
+                .value
+                .trim();
+
+
+            if (!name) {
+
+                alert(
+                    "Silakan masukkan nama project terlebih dahulu."
+                );
+
+                document
+                    .getElementById("projectName")
+                    .focus();
+
+                return;
+
+            }
+
+
+            alert(
+                "Project berhasil dibuat! 🎉\n\n" +
+                "Nama: " + name + "\n" +
+                "Template: " + selectedTemplate
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>

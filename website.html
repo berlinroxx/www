@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Coffee House</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f7f4ef;
+
+            color: #171717;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            height: 75px;
+
+            background:
+                rgba(247, 244, 239, .94);
+
+            backdrop-filter:
+                blur(12px);
+
+            border-bottom:
+                1px solid #ddd7ce;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 7%;
+
+        }
+
+
+        .logo {
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+        }
+
+
+        .nav-links {
+
+            margin-left: auto;
+
+            display: flex;
+
+            gap: 30px;
+
+            align-items: center;
+        }
+
+
+        .nav-links a {
+
+            color: #555;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: .2s;
+        }
+
+
+        .nav-links a:hover {
+
+            color: #111;
+        }
+
+
+        .nav-button {
+
+            padding:
+                11px 19px;
+
+            background:
+                #171717;
+
+            color: white !important;
+
+            border-radius: 25px;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height:
+                calc(100vh - 75px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding:
+                80px 20px;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 30%,
+                    #fff,
+                    #f7f4ef 65%
+                );
+        }
+
+
+        .hero-content {
+
+            max-width: 850px;
+        }
+
+
+        .badge {
+
+            display: inline-block;
+
+            padding:
+                8px 15px;
+
+            border:
+                1px solid #d8d0c6;
+
+            border-radius: 30px;
+
+            color: #665d53;
+
+            font-size: 13px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .hero h1 {
+
+            font-size:
+                clamp(48px, 8vw, 88px);
+
+            line-height: 1;
+
+            letter-spacing:
+                -4px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .hero h1 span {
+
+            color: #806044;
+        }
+
+
+        .hero p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #6a645e;
+
+            font-size: 19px;
+
+            line-height: 1.7;
+        }
+
+
+        .hero-buttons {
+
+            margin-top: 35px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+        }
+
+
+        .primary {
+
+            padding:
+                15px 26px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background: #171717;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .secondary {
+
+            padding:
+                15px 26px;
+
+            border:
+                1px solid #cfc7bd;
+
+            border-radius: 30px;
+
+            background: transparent;
+
+            color: #333;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .section {
+
+            padding:
+                100px 7%;
+        }
+
+
+        .section-header {
+
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+
+        .section-header h2 {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .section-header p {
+
+            color: #746e68;
+
+            font-size: 16px;
+        }
+
+
+        .menu {
+
+            max-width: 1050px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+
+        .menu-card {
+
+            background: white;
+
+            border:
+                1px solid #e4dfd8;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            transition: .25s;
+        }
+
+
+        .menu-card:hover {
+
+            transform:
+                translateY(-6px);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0, 0, 0, .07);
+        }
+
+
+        .coffee-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 15px;
+
+            background: #eee5da;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .menu-card h3 {
+
+            margin-bottom: 8px;
+
+            font-size: 19px;
+        }
+
+
+        .menu-card p {
+
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 20px;
+        }
+
+
+        .price {
+
+            font-weight: bold;
+
+            color: #806044;
+        }
+
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .about {
+
+            background: #171717;
+
+            color: white;
+
+            text-align: center;
+        }
+
+
+        .about-content {
+
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+
+        .about h2 {
+
+            font-size: 42px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .about p {
+
+            color: #aaa;
+
+            line-height: 1.8;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact {
+
+            text-align: center;
+
+            background: #eee9e2;
+        }
+
+
+        .contact-box {
+
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+
+        .contact h2 {
+
+            font-size: 42px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .contact p {
+
+            color: #706a64;
+
+            line-height: 1.7;
+
+            margin-bottom: 25px;
+        }
+
+
+        .contact-button {
+
+            display: inline-block;
+
+            padding:
+                14px 25px;
+
+            border-radius: 28px;
+
+            background: #171717;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            padding:
+                30px 7%;
+
+            background: #111;
+
+            color: #777;
+
+            text-align: center;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 700px) {
+
+            nav {
+
+                padding: 0 20px;
+            }
+
+
+            .nav-links a:not(.nav-button) {
+
+                display: none;
+            }
+
+
+            .hero h1 {
+
+                letter-spacing: -2px;
+            }
+
+
+            .hero-buttons {
+
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+
+            .menu {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .section {
+
+                padding:
+                    70px 20px;
+            }
+
+
+            .section-header h2,
+            .about h2,
+            .contact h2 {
+
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            ☕ Coffee House
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#menu">
+                Menu
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a
+                href="#contact"
+                class="nav-button"
+            >
+                Visit Us
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- HERO -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+        <div class="hero-content">
+
+
+            <div class="badge">
+                ☕ Freshly brewed every day
+            </div>
+
+
+            <h1>
+                Good coffee.
+                <span>Good moments.</span>
+            </h1>
+
+
+            <p>
+                Nikmati kopi terbaik dengan suasana
+                nyaman, hangat, dan menu pilihan
+                yang dibuat khusus untuk menemani
+                hari kamu.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary"
+                    onclick="scrollToMenu()"
+                >
+                    Explore our menu →
+                </button>
+
+
+                <button
+                    class="secondary"
+                    onclick="scrollToContact()"
+                >
+                    Find our cafe
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- MENU -->
+
+    <section
+        class="section"
+        id="menu"
+    >
+
+        <div class="section-header">
+
+            <h2>
+                Our Menu
+            </h2>
+
+            <p>
+                Simple ingredients. Great coffee.
+            </p>
+
+        </div>
+
+
+        <div class="menu">
+
+
+            <div class="menu-card">
+
+                <div class="coffee-icon">
+                    ☕
+                </div>
+
+                <h3>
+                    Classic Espresso
+                </h3>
+
+                <p>
+                    Espresso dengan aroma kuat
+                    dan rasa yang seimbang.
+                </p>
+
+                <div class="price">
+                    Rp 25.000
+                </div>
+
+            </div>
+
+
+            <div class="menu-card">
+
+                <div class="coffee-icon">
+                    🥛
+                </div>
+
+                <h3>
+                    Cafe Latte
+                </h3>
+
+                <p>
+                    Espresso lembut dengan
+                    steamed milk yang creamy.
+                </p>
+
+                <div class="price">
+                    Rp 32.000
+                </div>
+
+            </div>
+
+
+            <div class="menu-card">
+
+                <div class="coffee-icon">
+                    🧊
+                </div>
+
+                <h3>
+                    Iced Coffee
+                </h3>
+
+                <p>
+                    Kopi dingin yang menyegarkan
+                    untuk menemani aktivitasmu.
+                </p>
+
+                <div class="price">
+                    Rp 30.000
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ABOUT -->
+
+    <section
+        class="section about"
+        id="about"
+    >
+
+        <div class="about-content">
+
+            <h2>
+                Made with passion.
+            </h2>
+
+            <p>
+                Coffee House dibuat untuk orang-orang
+                yang menghargai kopi dan percakapan
+                yang baik. Setiap cangkir dibuat
+                dengan biji kopi pilihan dan
+                perhatian terhadap detail.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- CONTACT -->
+
+    <section
+        class="section contact"
+        id="contact"
+    >
+
+        <div class="contact-box">
+
+            <h2>
+                Come say hello.
+            </h2>
+
+            <p>
+                Kami menunggu kamu di Coffee House.
+                Datang dan nikmati secangkir kopi
+                bersama kami.
+            </p>
+
+
+            <a
+                href="mailto:hello@coffeehouse.com"
+                class="contact-button"
+            >
+                Contact us →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Coffee House.
+        Built with AI.
+
+    </footer>
+
+
+
+    <script>
+
+        function scrollToMenu() {
+
+            document
+                .getElementById("menu")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        function scrollToContact() {
+
+            document
+                .getElementById("contact")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
